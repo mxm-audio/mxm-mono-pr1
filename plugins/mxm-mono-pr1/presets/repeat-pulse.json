@@ -1,0 +1,1282 @@
+{
+  "schema_version": 1,
+  "plugin": "dk.mxm.mxm-mono-pr1",
+  "name": "Repeat pulse",
+  "category": "sequence",
+  "_comment": "`v` is the value and is authoritative. `text` is this plugin's own formatting of it, kept so the file can be read, and is never loaded.",
+  "params": {
+    "amp_env_attack": {
+      "v": 0.0,
+      "text": "2.0 ms"
+    },
+    "amp_env_decay": {
+      "v": 0.18,
+      "text": "33.5 ms"
+    },
+    "amp_env_release": {
+      "v": 0.28503174,
+      "text": "200.0 ms"
+    },
+    "amp_env_sustain": {
+      "v": 0.35,
+      "text": "35 %"
+    },
+    "bend_range": {
+      "v": 0.29166666,
+      "text": "7 st"
+    },
+    "cutoff": {
+      "v": 0.68,
+      "text": "4.3 kHz"
+    },
+    "drone": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "filter_env_attack": {
+      "v": 0.0,
+      "text": "2.0 ms"
+    },
+    "filter_env_decay": {
+      "v": 0.28503174,
+      "text": "200.0 ms"
+    },
+    "filter_env_release": {
+      "v": 0.28503174,
+      "text": "200.0 ms"
+    },
+    "filter_env_sustain": {
+      "v": 0.8,
+      "text": "80 %"
+    },
+    "glide_mode": {
+      "v": 1.0,
+      "text": "Auto"
+    },
+    "glide_time": {
+      "v": 0.0,
+      "text": "0.0 ms"
+    },
+    "key_mode": {
+      "v": 0.0,
+      "text": "Normal"
+    },
+    "lfo_rate": {
+      "v": 0.46,
+      "text": "1.4 Hz"
+    },
+    "lfo_saw": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "lfo_square": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "lfo_sync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "lfo_triangle": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "master_tune": {
+      "v": 0.5,
+      "text": "0.00 st"
+    },
+    "mod_afreq_aenv": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_bend": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_bus": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_fenv": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_gate": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_key": {
+      "v": 0.5,
+      "text": "+0.00 st/oct"
+    },
+    "mod_afreq_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_lfo": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_lfoon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_afreq_noise": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_osca": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_oscb": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_press": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_vel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_afreq_wbus": {
+      "v": 0.5104167,
+      "text": "+0.50 st"
+    },
+    "mod_afreq_wbuson": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_afreq_wheel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_afreq_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_bus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_amp_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_lfo": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_amp_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_amp_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_bus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_apw_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_lfo": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_lfoon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_apw_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_apw_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_apw_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_aenv": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_bend": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_bus": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_fenv": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_gate": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_key": {
+      "v": 0.5,
+      "text": "+0.00 st/oct"
+    },
+    "mod_bfreq_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_lfo": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_noise": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_osca": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_oscb": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_press": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_vel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bfreq_wbus": {
+      "v": 0.5104167,
+      "text": "+0.50 st"
+    },
+    "mod_bfreq_wbuson": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_bfreq_wheel": {
+      "v": 0.5,
+      "text": "+0.00 st"
+    },
+    "mod_bfreq_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_bus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_bpw_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_lfo": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_bpw_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_bpw_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_aenv": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_bus": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_fenv": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_fenvon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_cutoff_keyon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_lfo": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_lfoon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_cutoff_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_osca": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_oscb": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_wbus": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_cutoff_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_cutoff_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_aenv": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_bend": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_bus": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_fenv": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_gate": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_key": {
+      "v": 0.5,
+      "text": "+0.00 oct/oct"
+    },
+    "mod_lforate_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_lfo": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_noise": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_osca": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_oscb": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_press": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_vel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_wbus": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_lforate_wheel": {
+      "v": 0.5,
+      "text": "+0.00 oct"
+    },
+    "mod_lforate_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_bus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_key": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_lfo": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_modbus_lfoon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_modbus_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_modbus_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_modbus_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_bus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_buson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_key": {
+      "v": 0.5,
+      "text": "+0 %/oct"
+    },
+    "mod_reso_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_lfo": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_reso_wheel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_reso_wheelon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_aenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_aenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_bend": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_bendon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_bus": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_wbus_buson": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "mod_wbus_fenv": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_fenvon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_gate": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_gateon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_key": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_keyon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_lfo": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_lfoon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_noise": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_noiseon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_osca": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_oscaon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_oscb": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_oscbon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_press": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_presson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_vel": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_velon": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_wbus": {
+      "v": 0.5,
+      "text": "+0 %"
+    },
+    "mod_wbus_wbuson": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "mod_wbus_wheel": {
+      "v": 1.0,
+      "text": "+100 %"
+    },
+    "mod_wbus_wheelon": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "noise_external_level": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "osc_a_frequency": {
+      "v": 0.5,
+      "text": "0.00 st"
+    },
+    "osc_a_level": {
+      "v": 0.7,
+      "text": "70 %"
+    },
+    "osc_a_octave": {
+      "v": 0.0,
+      "text": "0"
+    },
+    "osc_a_pulse": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "osc_a_pulse_width": {
+      "v": 0.5,
+      "text": "50 %"
+    },
+    "osc_a_saw": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "osc_a_sync": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "osc_b_frequency": {
+      "v": 0.5058333,
+      "text": "0.07 st"
+    },
+    "osc_b_keyboard_follow": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "osc_b_level": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "osc_b_low_frequency": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "osc_b_octave": {
+      "v": 0.0,
+      "text": "0"
+    },
+    "osc_b_pulse": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "osc_b_pulse_width": {
+      "v": 0.5,
+      "text": "50 %"
+    },
+    "osc_b_saw": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "osc_b_triangle": {
+      "v": 0.0,
+      "text": "Off"
+    },
+    "repeat_external": {
+      "v": 1.0,
+      "text": "On"
+    },
+    "resonance": {
+      "v": 0.0,
+      "text": "0 %"
+    },
+    "volume": {
+      "v": 0.8,
+      "text": "80 %"
+    }
+  },
+  "state": null
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "The conservative collection-role map for mxm-mono-pr1.",
+    "Only controls whose meaning matches an existing role are claimed. The independent waveform",
+    "switches cannot truthfully fill a single wave selector.",
+    "Osc 2 tune is the B oscillator's interval control. The B-to-A sync switch occupies osc2.sync",
+    "because it enables oscillator 2 as oscillator 1's sync source. noise_external_level fills the",
+    "third mixer source, the noise level; the external input the id is named for was removed.",
+    "The five routing roles below name the route the INIT patch wires, per the control map's",
+    "amendment: a fixed knob's promise is about Init, and re-pointing a route is the player's act.",
+    "Each of those pairs is present in Init at zero depth precisely so the role is not a dead knob:",
+    "an absent route contributes nothing whatever its amount holds.",
+    "The former note that Direct/Wheel routing could not reduce to these roles is retired with the",
+    "buses themselves."
+  ],
+  "instruments": [
+    {
+      "clap_id": "dk.mxm.mxm-mono-pr1",
+      "name": "mxm-mono-pr1",
+      "params": {
+        "osc1.range": "osc_a_octave",
+        "osc1.tune": "master_tune",
+        "osc1.pulse_width": "osc_a_pulse_width",
+        "osc1.pwm_depth": "mod_apw_lfo",
+
+        "osc2.range": "osc_b_octave",
+        "osc2.tune": "osc_b_frequency",
+        "osc2.pulse_width": "osc_b_pulse_width",
+        "osc2.sync": "osc_a_sync",
+
+        "mixer.src1": "osc_a_level",
+        "mixer.src2": "osc_b_level",
+        "mixer.src3": "noise_external_level",
+
+        "filter.cutoff": "cutoff",
+        "filter.resonance": "resonance",
+        "filter.env_amount": "mod_cutoff_fenv",
+        "filter.key_track": "mod_cutoff_key",
+        "filter.lfo_amount": "mod_cutoff_lfo",
+
+        "amp_env.attack": "amp_env_attack",
+        "amp_env.decay": "amp_env_decay",
+        "amp_env.sustain": "amp_env_sustain",
+        "amp_env.release": "amp_env_release",
+
+        "filter_env.attack": "filter_env_attack",
+        "filter_env.decay": "filter_env_decay",
+        "filter_env.sustain": "filter_env_sustain",
+        "filter_env.release": "filter_env_release",
+
+        "lfo1.rate": "lfo_rate",
+        "lfo1.to_pitch": "mod_afreq_lfo",
+        "lfo1.to_filter": "mod_cutoff_lfo",
+
+        "voice.glide": "glide_time",
+        "voice.bend_range": "bend_range",
+        "voice.output": "volume"
+      }
+    }
+  ]
+}

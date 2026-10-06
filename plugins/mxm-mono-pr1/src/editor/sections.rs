@@ -45,10 +45,11 @@ fn target_routes(p: &MxmMonoPr1Params, which: usize) -> Vec<mxm_modulation_param
 /// One target's routes, drawn beneath the control they move.
 ///
 /// **Routing belongs under the thing it affects**, never in a detached footer — the ruling
-/// `plugins/mxm-mono-00/AGENTS.md` records and design system §7.4 makes normative. The rows and the
-/// `‹ modulate ›` menu come from `mxm_modulation_params`, so every editor in the collection draws
-/// this the same way: a target with nothing routed draws no group at all, the menu sits outside the
-/// group and is labelled with its target, and each row ends in a remove rather than a switch.
+/// mxm-mono-00's `plugins/mxm-mono-00/AGENTS.md` records and design system §7.4 makes normative.
+/// The rows and the `‹ modulate ›` menu come from `mxm_modulation_params`, so every editor in the
+/// collection draws this the same way: a target with nothing routed draws no group at all, the
+/// menu sits outside the group and is labelled with its target, and each row ends in a remove
+/// rather than a switch.
 fn routes(
     ui: &mut Ui,
     tokens: &Tokens,

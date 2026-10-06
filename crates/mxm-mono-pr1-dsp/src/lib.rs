@@ -10,7 +10,8 @@
 //! survives as a summing module, the wheel stage as a **multiplier** module, and every destination
 //! switch as a route's presence.
 //!
-//! The implementation is original MIT-licensed code informed by
+//! The implementation is original code — MIT-licensed until the split of 2026-10-06, and
+//! GPL-3.0-or-later with the rest of this repository since — informed by
 //! `research:instruments/pro-one.md`. Fidelity remains unverified; values not established by that
 //! research are labelled chosen beside their definitions and in this crate's `AGENTS.md`.
 

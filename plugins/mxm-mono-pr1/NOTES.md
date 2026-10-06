@@ -3,6 +3,9 @@
 The detail behind this folder's AGENTS.md: history, measurements, rationale and worked examples.
 AGENTS.md is the contract; this file is the reference it links to.
 
+*Since the split (2026-10-06):* the `plans/` cited below are the design history, in the private
+archive.
+
 ## Permanent public surface
 
 - **The LFO rate has the collection's one tempo sync** (`lfo_sync`;
@@ -213,7 +216,7 @@ shapes — or a display's hover text (the two buses, the filter response), writt
 `‹ modulate ›` list read the same word — the owner's ruling, 2026-09-14: a card called *Modulation*
 holding a source called *Mod bus* made the two look like different things.
 
-**Every card is a `mxm_ui::tree`** (`crates/ui/AGENTS.md`, *A card body as data*).
+**Every card is a `mxm_ui::tree`** (mxm-kit's [`crates/ui/AGENTS.md`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/ui/AGENTS.md), *A card body as data*).
 `sections::card` describes a card's body once — knob columns, switches, wrapping toggle rows, route
 stacks, captions and displays — and that one description is measured for the card's floor and
 height and drawn leaf by leaf through the same bindings (`sections::paint`); the paged view is
@@ -352,4 +355,7 @@ The controller map also requires focused JSON/schema, role and parameter-id vali
 independently reproduced broad release render `8e1c04ab75ef28f5` is provisionally pinned and its
 focused sensitivity discriminator passes. No human listening is claimed, and final reference
 listening remains a manual release gate. Linux and macOS are unverified because there is no CI;
-development verification is Windows.
+development verification is Windows. *Since the split (2026-10-06):* CI runs the tests and the
+host suite on Windows, macOS and Linux on a `v*` release tag or when started by hand, Linux is
+checked in WSL before every push, and the `golden_audio` digest is compared on Windows only; the
+`editor_resize` inventory is the workspace's `collection-tests/editor_resize.rs`.

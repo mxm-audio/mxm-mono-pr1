@@ -11,7 +11,7 @@ envelopes; the Pro-One CEM3320 path and a CA3280-style VCA. There is no effect s
 input. Fidelity requires a manual hardware/listening comparison; none is claimed by the DSP tests.
 
 **Modulation is the collection's shared any-to-any routing**
-([`crates/mxm-modulation`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/mxm-modulation/AGENTS.md)), declared for this machine in `routing.rs`.
+(mxm-kit's [`crates/mxm-modulation`](https://github.com/mxm-audio/mxm-kit/blob/main/crates/mxm-modulation/AGENTS.md)), declared for this machine in `routing.rs`.
 The hardware's Direct/Wheel buses are retired into it under `plans/plan-mxm-mono-pr1-modulation.md`
 (in the private archive): the summing stage survives as a summing module, the wheel stage as a
 **multiplier module**, and every destination switch as a route's presence. Fourteen sources by nine

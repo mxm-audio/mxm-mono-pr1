@@ -22,11 +22,12 @@ pub struct WaveEnables {
 
 /// **The triangle is on by default, and that is the init contract rather than a preference.**
 ///
-/// `plugins/AGENTS.md`: a *configuration* control starts at a musically useful value, and *"no LFO,
-/// but the LFO at a good vibrato rate" is not a contradiction — depth zero makes it inaudible, and a
-/// sensible rate makes it vibrato the moment depth is raised rather than a drift or a buzz.* With
-/// **no** wave enabled, raising a depth makes no sound at all, which is what the owner found on
-/// 2026-09-14: the routing was wired and working and the LFO had nothing to say.
+/// mxm-kit's `docs/plugin-conventions.md`, which `plugins/AGENTS.md` links: a *configuration*
+/// control starts at a musically useful value, and *"no LFO, but the LFO at a good vibrato rate" is
+/// not a contradiction — depth zero makes it inaudible, and a sensible rate makes it vibrato the
+/// moment depth is raised rather than a drift or a buzz.* With **no** wave enabled, raising a depth
+/// makes no sound at all, which is what the owner found on 2026-09-14: the routing was wired and
+/// working and the LFO had nothing to say.
 ///
 /// The triangle rather than the saw because the saw at a vibrato rate is a rising drift and the
 /// square is a trill; the triangle is the shape the sentence above is about. The switches are the

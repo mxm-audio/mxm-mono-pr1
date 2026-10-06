@@ -53,7 +53,8 @@ so every control is on a card except Volume, which is in the app bar — plus ev
 computed from its layout tree and checked with every route revealed, plus
 focused MXM Player discovery, state, rendering, hostile-rate/block, allocation, lifecycle and native
 resize paths. Native visual/recognisability review, real-DAW operation, final reference listening and
-Linux/macOS verification remain manual release gates. Fidelity is **UNVERIFIED**: no hardware
+hand checks on Linux/macOS remain manual release gates; CI builds and tests all three platforms on a
+release tag. Fidelity is **UNVERIFIED**: no hardware
 comparison or recognisability trial has been run.
 
 ## Building
@@ -63,4 +64,5 @@ cargo xtask bundle mxm-mono-pr1 --release
 ```
 
 The loadable bundle is written to `target/bundled/mxm-mono-pr1.clap`; bundling stages the controller
-map beside it. MIT licensed — see [LICENSE](LICENSE). All implementation code is original.
+map beside it. GPL-3.0-or-later — see the repository's [`LICENSE`](../../LICENSE). All
+implementation code is original.

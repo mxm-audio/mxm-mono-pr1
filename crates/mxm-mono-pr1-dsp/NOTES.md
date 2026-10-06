@@ -3,6 +3,9 @@
 The detail behind this folder's AGENTS.md: history, measurements, rationale and worked examples.
 AGENTS.md is the contract; this file is the reference it links to.
 
+*Since the split (2026-10-06):* the `plans/` cited below are the design history, in the private
+archive, and `crates/mxm-modulation` is mxm-kit's.
+
 ## The control network: why it is ordered and armed as it is
 
 `signal.rs` keeps continuous CV, held gates and one-sample pulses as distinct types. **A gate's
@@ -279,3 +282,6 @@ operating drive; integrated bus reach, exact release/inert silence, post-phrase 
 recursive denormal exclusion, deterministic renders, and finite bounded sweeps/frequency checks from
 1 kHz to 768 kHz. The 18.3 s demo rendered at peak 0.235/RMS 0.135; it has not been listened to.
 Linux and macOS are unverified because there is no CI; development verification is Windows.
+*Since the split (2026-10-06):* CI runs the tests on Windows, macOS and Linux on a `v*` release tag
+or when started by hand, and Linux is checked in WSL before every push (root *Windows, Linux and
+macOS*).

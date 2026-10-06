@@ -14,9 +14,9 @@ real-host audio proof are implemented; visual §15 and real-DAW gates remain. Fi
 
 # Ownership
 
-Owns `Cargo.toml`, `LICENSE`, `README.md`, `control-map.json`, `presets/` and `src/`: permanent
+Owns `Cargo.toml`, `README.md`, `control-map.json`, `presets/` and `src/`: permanent
 identity, 318 host parameters, state, host-event translation, audio layouts, realtime callback,
-telemetry and factory content. It does not own DSP algorithms, shared preset behaviour, shared UI,
+telemetry and factory content. Its licence is the repository's root `LICENSE`. It does not own DSP algorithms, shared preset behaviour, shared UI,
 or the player.
 
 # Local Contracts
@@ -140,7 +140,8 @@ Detail and rulings: [NOTES.md § Editor](NOTES.md#editor).
 # Verification
 
 `target/bundled/` is a shared mutable profile slot. Before each collection resize command below,
-stage **every name in the collection's `editor_resize` inventory (newdawn-workspace)** in the stated profile; never mix
+stage **every name in the collection's `editor_resize` inventory (the workspace's
+`collection-tests/editor_resize.rs`, local, not on GitHub)** in the stated profile; never mix
 profiles. The native lifecycle, validator, robustness and resize checks run while their matching
 artifact is staged. After debug proof, repeat release staging for the complete inventory and leave
 release in the slot.
@@ -156,15 +157,15 @@ clap-validator validate target/bundled/mxm-mono-pr1.clap
 cargo test -p mxm-mono-pr1-host-tests --test behaviour -- --nocapture
 cargo test -p mxm-mono-pr1-host-tests --test behaviour editor_opens_closes_and_reopens_through_the_player -- --ignored --nocapture
 cargo test -p mxm-mono-pr1-host-tests --test robustness -- --nocapture
-cargo test -p mxm-mono-pr1-host-tests --test golden_audio -- --nocapture
-# then newdawn-workspace's editor_resize: every product's editor, natively resized
+cargo test -p mxm-mono-pr1-host-tests --test golden_audio -- --nocapture   # digest pinned on Windows only
+# then the workspace's collection-tests/editor_resize.rs: every product's editor, natively resized
 
 # DEBUG PROFILE: stage every resize-inventory bundle without --release first.
 cargo xtask bundle mxm-mono-pr1
 clap-validator validate target/bundled/mxm-mono-pr1.clap
 cargo test -p mxm-mono-pr1-host-tests --test behaviour editor_opens_closes_and_reopens_through_the_player -- --ignored --nocapture
 cargo test -p mxm-mono-pr1-host-tests --test robustness -- --nocapture
-# then newdawn-workspace's editor_resize: every product's editor, natively resized
+# then the workspace's collection-tests/editor_resize.rs: every product's editor, natively resized
 
 # RESTORE: stage every resize-inventory bundle with --release again; validate release last.
 cargo xtask bundle mxm-mono-pr1 --release

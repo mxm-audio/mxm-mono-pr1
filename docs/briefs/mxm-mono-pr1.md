@@ -1,6 +1,6 @@
 # mxm-mono-pr1 — UI design brief
 
-Required by `MXM_DESIGN_SYSTEM.md` §14 and written before editor work. The instrument is a
+Required by mxm-kit's [`MXM_DESIGN_SYSTEM.md`](https://github.com/mxm-audio/mxm-kit/blob/main/docs/MXM_DESIGN_SYSTEM.md) §14 and written before editor work. The instrument is a
 functional copy of the documented 1981 Sequential Circuits Pro-One voice, cited as
 `research:instruments/pro-one.md`; the interface is not a copy of its panel. **Fidelity is
 UNVERIFIED:** no hardware or installed emulation was measured for the research page.

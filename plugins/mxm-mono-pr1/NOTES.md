@@ -358,4 +358,4 @@ listening remains a manual release gate. Linux and macOS are unverified because 
 development verification is Windows. *Since the split (2026-10-06):* CI runs the tests and the
 host suite on Windows, macOS and Linux on a `v*` release tag or when started by hand, Linux is
 checked in WSL before every push, and the `golden_audio` digest is compared on Windows only; the
-`editor_resize` inventory is the workspace's `collection-tests/editor_resize.rs`.
+`editor_resize` inventory is newdawn-workspace's [`collection-tests/editor_resize.rs`](https://github.com/mxm-audio/newdawn-workspace/blob/main/collection-tests/editor_resize.rs).

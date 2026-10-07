@@ -53,8 +53,8 @@ so every control is on a card except Volume, which is in the app bar — plus ev
 computed from its layout tree and checked with every route revealed, plus
 focused MXM Player discovery, state, rendering, hostile-rate/block, allocation, lifecycle and native
 resize paths. Native visual/recognisability review, real-DAW operation, final reference listening and
-hand checks on Linux/macOS remain manual release gates; CI builds and tests all three platforms on a
-`v*` tag. Fidelity is **UNVERIFIED**: no hardware
+hand checks on Linux/macOS remain manual release gates; CI builds and tests all three platforms
+when started by hand. Fidelity is **UNVERIFIED**: no hardware
 comparison or recognisability trial has been run.
 
 ## Building

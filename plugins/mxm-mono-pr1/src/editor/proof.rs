@@ -63,6 +63,7 @@ impl nice_plug::context::gui::GuiContextInner for ApplyingHost {
     fn set_state(&self, _state: PluginState) {}
 }
 
+use mxm_plugin_test::keyboard_checks::{OUT, VALUE, key_of};
 use mxm_plugin_test::{opening_size, paging_checks};
 
 fn render_layout(width: f32) -> Vec<Rect> {
@@ -839,8 +840,8 @@ fn semantic_toggle_segment_and_knob_each_emit_one_balanced_host_gesture() {
             .role(egui::accesskit::Role::Slider),
     );
     cutoff.focus();
-    // VALUE + ↑, kept with OUT: W, ↑ and Tab in the default keymap.
-    for key in [egui::Key::W, egui::Key::ArrowUp, egui::Key::Tab] {
+    // VALUE + ↑, kept with OUT.
+    for key in [key_of(VALUE), egui::Key::ArrowUp, key_of(OUT)] {
         harness.key_press(key);
     }
     harness.run_steps(2);
@@ -849,8 +850,8 @@ fn semantic_toggle_segment_and_knob_each_emit_one_balanced_host_gesture() {
     // Volume is in the app bar, on every page, and an edit there is one gesture like any other.
     let volume = harness.get_by_label("Volume");
     volume.focus();
-    // VALUE + ↑, kept with OUT: W, ↑ and Tab in the default keymap.
-    for key in [egui::Key::W, egui::Key::ArrowUp, egui::Key::Tab] {
+    // VALUE + ↑, kept with OUT.
+    for key in [key_of(VALUE), egui::Key::ArrowUp, key_of(OUT)] {
         harness.key_press(key);
     }
     harness.run_steps(2);

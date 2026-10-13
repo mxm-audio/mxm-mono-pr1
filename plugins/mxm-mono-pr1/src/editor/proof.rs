@@ -667,7 +667,7 @@ fn every_musician_control_and_semantic_view_paints_inside_its_card_across_scales
         for scale in [1.0, 1.5, 2.0] {
             let params = Arc::new(MxmMonoPr1Params::default());
             let telemetry = Arc::new(Telemetry::default());
-            telemetry.request_theme(theme);
+            telemetry.dev.request_theme(theme);
             let host = Arc::new(ApplyingHost::default());
             // Keep the physical window fixed: higher scale means fewer logical points. The harness
             // takes the window at its native one point per pixel, and the scale zooms it, so the
@@ -748,7 +748,7 @@ fn source_panel_tuning_controls_are_always_visible_and_cannot_be_collapsed() {
     harness.get_by_label("Glide time");
     harness.get_by_label("Master tune");
     harness.get_by_label("Bend range");
-    telemetry.request_disclosure(false);
+    telemetry.dev.request_disclosure(false);
     harness.run_steps(10);
     harness.get_by_label("Master tune");
     harness.get_by_label("Bend range");
@@ -769,19 +769,19 @@ fn private_requests_switch_theme_browser_and_parameters_without_audio_edits() {
     mxm_ui::paging::editor::request_card(&harness.ctx, mxm_ui::paging::Key(0));
     harness.run_steps(20);
     harness.get_by_label("Master tune");
-    telemetry.request_theme(1);
+    telemetry.dev.request_theme(1);
     harness.run_steps(3);
     assert_eq!(
         mxm_ui::theme::tokens(&harness.ctx).canvas,
         mxm_ui::DARK.canvas,
         "developer theme request was not applied"
     );
-    telemetry.request_browser(true);
+    telemetry.dev.request_browser(true);
     harness.run_steps(3);
     harness.get_by_label("Banks");
-    telemetry.request_browser(false);
+    telemetry.dev.request_browser(false);
     harness.run_steps(3);
-    telemetry.request_view(mxm_ui::paging::PARAMETERS as u8);
+    telemetry.dev.request_view(mxm_ui::paging::PARAMETERS as u8);
     harness.run_steps(3);
     // **Every voice control, and the routing pairs Init reveals.** A route row exists because its
     // pair is present, so 118 of 125 are deliberately undrawn here; asserting all 289 paint would

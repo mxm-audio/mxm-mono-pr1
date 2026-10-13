@@ -181,19 +181,21 @@ impl MxmMonoPr1 {
             } if value.is_finite() => match cc {
                 DEV_VIEW_CC if self.dev_cc => {
                     self.telemetry
+                        .dev
                         .request_view((value.clamp(0.0, 1.0) * 127.0).round() as u8);
                     None
                 }
                 DEV_DISCLOSURE_CC if self.dev_cc => {
-                    self.telemetry.request_disclosure(value >= 0.5);
+                    self.telemetry.dev.request_disclosure(value >= 0.5);
                     None
                 }
                 DEV_BROWSER_CC if self.dev_cc => {
-                    self.telemetry.request_browser(value >= 0.5);
+                    self.telemetry.dev.request_browser(value >= 0.5);
                     None
                 }
                 DEV_THEME_CC if self.dev_cc => {
                     self.telemetry
+                        .dev
                         .request_theme((value.clamp(0.0, 1.0) * 127.0).round() as u8);
                     None
                 }
@@ -404,7 +406,7 @@ impl Plugin for MxmMonoPr1 {
                 }
                 last = Some((frame, params));
             }
-            self.telemetry.publish_peak(peak);
+            self.telemetry.meter.publish(peak);
             if let Some((frame, params)) = last {
                 self.telemetry
                     .publish_frame(frame, params, self.sample_rate);
@@ -752,10 +754,10 @@ mod tests {
                 value,
             });
         }
-        assert_eq!(plugin.telemetry.take_view_request(), None);
-        assert_eq!(plugin.telemetry.take_disclosure_request(), None);
-        assert_eq!(plugin.telemetry.take_browser_request(), None);
-        assert_eq!(plugin.telemetry.take_theme_request(), None);
+        assert_eq!(plugin.telemetry.dev.take_view(), None);
+        assert_eq!(plugin.telemetry.dev.take_disclosure(), None);
+        assert_eq!(plugin.telemetry.dev.take_browser(), None);
+        assert_eq!(plugin.telemetry.dev.take_theme(), None);
 
         plugin.dev_cc = true;
         plugin.queue_host_event(NoteEvent::MidiCC {
@@ -782,10 +784,10 @@ mod tests {
             cc: DEV_THEME_CC,
             value: 1.0 / 127.0,
         });
-        assert_eq!(plugin.telemetry.take_view_request(), Some(1));
-        assert_eq!(plugin.telemetry.take_disclosure_request(), Some(true));
-        assert_eq!(plugin.telemetry.take_browser_request(), Some(false));
-        assert_eq!(plugin.telemetry.take_theme_request(), Some(1));
+        assert_eq!(plugin.telemetry.dev.take_view(), Some(1));
+        assert_eq!(plugin.telemetry.dev.take_disclosure(), Some(true));
+        assert_eq!(plugin.telemetry.dev.take_browser(), Some(false));
+        assert_eq!(plugin.telemetry.dev.take_theme(), Some(1));
     }
 
     #[test]

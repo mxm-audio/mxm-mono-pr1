@@ -70,7 +70,7 @@ archive.
 - **A route's amount reads in its target's own domain**, semitones, octaves, or a percentage that
   carries its target's scale, and a typed number sets the depth it describes
   (`a_route_amount_reads_and_parses_in_its_targets_own_domain`). **It never prints a negative
-  zero**: its number goes through `mxm_modulation_params::signed`, and
+  zero**: its number goes through `mxm_params::text::signed`, and
   `every_reading_survives_the_hosts_round_trip_a_rounded_zero_included` sends every amount, the
   bus's included, through the host's own conversion either side of zero, where a plain signed
   format printed `-0`, which `clap-validator`'s `param-conversions` fails whenever its random

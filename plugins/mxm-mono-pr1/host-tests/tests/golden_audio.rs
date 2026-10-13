@@ -13,10 +13,9 @@
 //! 4. Replace `GOLDEN_DIGEST` with the reported digest, document why beside the constant, and run
 //!    this test again. Never regenerate the digest without the listening and diff review.
 
-use mxm_player_harness::app_harness;
-
 use mxm_player::events::input::Payload;
 use mxm_player::session::{FRAMES_PER_BLOCK, Session};
+use mxm_player_harness::host_test::digest;
 use std::path::PathBuf;
 
 const PLUGIN: &str = "dk.mxm.mxm-mono-pr1";
@@ -34,20 +33,11 @@ const DIGESTS_PINNED_HERE: bool = cfg!(target_os = "windows");
 const GOLDEN_SAMPLES: usize = 100 * FRAMES_PER_BLOCK * 2;
 
 fn bundle() -> Option<(PathBuf, PathBuf)> {
-    let dir = app_harness::any_bundled_dir()?;
-    let file = dir.join("mxm-mono-pr1.clap");
-    file.exists().then_some((dir, file))
+    mxm_player_harness::host_test::plugin_bundle("mxm-mono-pr1")
 }
 
 fn set(session: &mut Session, name: &str, fraction: f64) {
-    let parameter = session.state().param(name).unwrap().clone();
-    session
-        .app()
-        .engine_mut()
-        .push_gui_event(Payload::ParamValue {
-            param_id: parameter.id,
-            value: parameter.min + fraction * (parameter.max - parameter.min),
-        });
+    mxm_player_harness::host_test::push_fraction(session, name, fraction);
 }
 
 fn score(session: &mut Session, altered_sync_pwm: bool) -> Result<(), String> {
@@ -167,15 +157,4 @@ fn oracle_is_sensitive_to_sync_and_pwm() {
     if DIGESTS_PINNED_HERE {
         assert_ne!(digest(&session.captured()), GOLDEN_DIGEST);
     }
-}
-
-fn digest(samples: &[f32]) -> String {
-    let mut hash: u64 = 0xcbf2_9ce4_8422_2325;
-    for sample in samples {
-        for byte in sample.to_bits().to_le_bytes() {
-            hash ^= u64::from(byte);
-            hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
-        }
-    }
-    format!("{hash:016x}")
 }

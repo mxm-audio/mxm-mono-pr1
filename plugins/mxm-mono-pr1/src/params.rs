@@ -19,6 +19,8 @@ use mxm_mono_pr1_dsp::{
         FilterParams, MixerParams, OscillatorAParams, OscillatorBParams, Params as VoiceParams,
     },
 };
+use mxm_params::text;
+use mxm_params::text::ValueToString;
 use nice_plug::prelude::*;
 use std::sync::{Arc, RwLock};
 
@@ -93,22 +95,6 @@ impl OctaveParam {
     }
 }
 
-type ValueToString = Arc<dyn Fn(f32) -> String + Send + Sync>;
-type StringToValue = Arc<dyn Fn(&str) -> Option<f32> + Send + Sync>;
-
-fn v2s_percent() -> ValueToString {
-    Arc::new(|value| format!("{:.0} %", value * 100.0))
-}
-fn s2v_percent() -> StringToValue {
-    Arc::new(|text| {
-        text.trim()
-            .trim_end_matches('%')
-            .trim()
-            .parse::<f32>()
-            .ok()
-            .map(|value| value / 100.0)
-    })
-}
 /// Tenths of a millisecond below a second, hundredths of a second from it — **the unit chosen from
 /// the rounded tenths, not the raw value.** Chosen from the raw value, 0.99995 s printed
 /// `1000.0 ms`, which parses to one second and prints `1.00 s`.
@@ -122,41 +108,11 @@ fn v2s_time() -> ValueToString {
         }
     })
 }
-fn v2s_cutoff_hz_then_khz() -> ValueToString {
-    Arc::new(|value| {
-        // The mixed-unit formatter's `1.0 kHz` bucket parses to 1000 Hz, whose normalized inverse
-        // can preview just below the unit boundary and become `1000.0 Hz`. Give only that ambiguous
-        // bucket an integer-Hz spelling; all other values retain the usual compact presentation.
-        let rounded_hz = value.round();
-        if (1_000.0..=1_050.0).contains(&rounded_hz) {
-            format!("{rounded_hz:.0} Hz")
-        } else if value < 1_000.0 {
-            format!("{value:.1} Hz")
-        } else {
-            format!("{:.1} kHz", value / 1_000.0)
-        }
-    })
-}
-
-fn s2v_time() -> StringToValue {
-    Arc::new(|text| {
-        let text = text.trim().to_ascii_lowercase();
-        let (number, scale) = if let Some(number) = text.strip_suffix("ms") {
-            (number, 0.001)
-        } else if let Some(number) = text.strip_suffix('s') {
-            (number, 1.0)
-        } else {
-            (text.as_str(), 0.001)
-        };
-        number.trim().parse::<f32>().ok().map(|value| value * scale)
-    })
-}
-
 fn amount(name: &'static str, default: f32) -> FloatParam {
     FloatParam::new(name, default, FloatRange::Linear { min: 0.0, max: 1.0 })
         .with_smoother(SmoothingStyle::Linear(SIGNAL_SMOOTHING_MS))
-        .with_value_to_string(v2s_percent())
-        .with_string_to_value(s2v_percent())
+        .with_value_to_string(text::percent())
+        .with_string_to_value(text::parse_percent())
 }
 
 fn seconds(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
@@ -170,7 +126,7 @@ fn seconds(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
         },
     )
     .with_value_to_string(v2s_time())
-    .with_string_to_value(s2v_time())
+    .with_string_to_value(text::parse_time())
 }
 
 fn semitones(name: &'static str, default: f32, reach: f32) -> FloatParam {
@@ -461,7 +417,7 @@ impl Default for MxmMonoPr1Params {
                 },
             )
             .with_smoother(SmoothingStyle::Logarithmic(PITCH_SMOOTHING_MS))
-            .with_value_to_string(v2s_cutoff_hz_then_khz())
+            .with_value_to_string(text::cutoff_hertz())
             .with_string_to_value(formatters::s2v_f32_hz_then_khz()),
             resonance: amount("Resonance", defaults.filter.resonance),
             volume: amount("Volume", defaults.volume),
@@ -473,8 +429,8 @@ impl Default for MxmMonoPr1Params {
 impl MxmMonoPr1Params {
     /// Every permanent parameter in declaration order. Preset serialization and the editor's
     /// coverage test compare against this inventory so neither can silently omit a control.
-    pub fn all_parameters(&self) -> Vec<(&'static str, &dyn mxm_preset::ErasedParam)> {
-        let mut out: Vec<(&'static str, &dyn mxm_preset::ErasedParam)> = vec![
+    pub fn all_parameters(&self) -> Vec<(&'static str, &dyn mxm_params::ErasedParam)> {
+        let mut out: Vec<(&'static str, &dyn mxm_params::ErasedParam)> = vec![
             ("key_mode", &self.key_mode),
             ("glide_mode", &self.glide_mode),
             ("glide_time", &self.glide_time),
@@ -688,59 +644,14 @@ mod tests {
         1_050.4, 1_050.45, 1_050.5, 1_050.6,
     ];
 
-    /// **Every parameter's text survives the host's own conversion.** The CLAP wrapper formats a
-    /// normalised value, parses the text back to a normalised value and formats that again, so a
-    /// reading that chooses its unit or its sign from the raw value can print one text, parse to the
-    /// other side of its own switch and print another — which `clap-validator`'s
-    /// `param-conversions` fails only when its values land in that sliver, so a clean run proves
-    /// nothing (mxm-kit's `docs/code-review-notes.md` §6). This walks every parameter, with the
-    /// unit on as the host sees it, across clap-validator 0.4.1's own grid, the collection's
-    /// `i / 19` grid, and the normalised neighbours of every value in [`BOUNDARIES`].
+    /// **Every parameter's text survives the host's round trip**, with the unit on, across the
+    /// collection's grids and switch points (`mxm_plugin_test::text_checks`), plus both sides of
+    /// every value in [`BOUNDARIES`].
     #[test]
-    fn every_parameter_text_is_idempotent_through_the_hosts_conversion() {
-        let params = MxmMonoPr1Params::default();
-        let map = params.param_map();
-        let validator_values = 4_000_usize.div_ceil(map.len()).clamp(5, 100);
-        let mut failures: Vec<String> = Vec::new();
-        for (id, ptr, _group) in &map {
-            // SAFETY: `params` owns every parameter these pointers refer to and outlives the loop;
-            // this is the same access `param-conversions` makes through CLAP.
-            unsafe {
-                // The wrapper hands CLAP `normalised × step count` and divides by it on the way in.
-                let steps = ptr.step_count().unwrap_or(1) as f64;
-                let from_clap = |value: f64| value as f32 / steps as f32;
-                let grid = (0..=19).map(|i| (i as f32 / 19.0, "grid"));
-                let validator = (0..validator_values).map(|i| {
-                    let value = steps * (i as f64 / (validator_values - 1) as f64);
-                    (from_clap(value), "validator grid")
-                });
-                let boundary = BOUNDARIES.into_iter().flat_map(|plain| {
-                    let at = ptr.preview_normalized(plain).clamp(0.0, 1.0);
-                    [at.next_down().max(0.0), at, at.next_up().min(1.0)].map(|n| (n, "boundary"))
-                });
-                for (value, from) in grid.chain(validator).chain(boundary) {
-                    let first = ptr.normalized_value_to_string(value, true);
-                    let second = ptr.string_to_normalized_value(&first).map(|parsed| {
-                        ptr.normalized_value_to_string(from_clap(parsed as f64 * steps), true)
-                    });
-                    if second.as_deref() != Some(first.as_str()) {
-                        let failure = format!("{id}: {first:?} reads back as {second:?}");
-                        if failures
-                            .last()
-                            .is_none_or(|last| !last.starts_with(&failure))
-                        {
-                            let plain = ptr.preview_plain(value);
-                            failures.push(format!("{failure} ({from}, plain {plain})"));
-                        }
-                    }
-                }
-            }
-        }
-        assert!(
-            failures.is_empty(),
-            "{} parameter texts changed through the host's conversion:\n{}",
-            failures.len(),
-            failures.join("\n")
+    fn every_parameter_text_survives_the_hosts_round_trip() {
+        mxm_plugin_test::text_checks::every_text_round_trips(
+            &MxmMonoPr1Params::default(),
+            &BOUNDARIES,
         );
     }
 }

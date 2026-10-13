@@ -51,7 +51,7 @@ Detail: [NOTES.md § Permanent public surface](NOTES.md#permanent-public-surface
   the multiplier's two factors at full.
 - **A route's amount reads in its target's own domain** and parses typed text there
   (`a_route_amount_reads_and_parses_in_its_targets_own_domain`); **it never prints a negative zero**
-  (`mxm_modulation_params::signed`; `every_reading_survives_the_hosts_round_trip_a_rounded_zero_included`).
+  (`mxm_params::text::signed`; `every_reading_survives_the_hosts_round_trip_a_rounded_zero_included`).
 - **No external input** (the owner, 2026-09-26). No id retired with it: `repeat_external` and
   `noise_external_level` keep their ids, named *Repeat* and *Noise level*.
 - No effect, arpeggiator, note sequencer or random modulation may be added without changing the

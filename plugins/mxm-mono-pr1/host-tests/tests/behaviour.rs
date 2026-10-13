@@ -12,7 +12,6 @@ use clack_host::prelude::*;
 use clack_host::utils::Cookie;
 use mxm_player::engine::Engine;
 use mxm_player::engine::editor::Ownership;
-use mxm_player::events::input::Payload;
 use mxm_player::session::{FRAMES_PER_BLOCK, Session};
 use std::path::PathBuf;
 
@@ -21,9 +20,7 @@ const SAMPLE_RATE: f64 = 48_000.0;
 const SKIP: &str = "skipping: run `cargo xtask bundle mxm-mono-pr1 --release`";
 
 fn bundle() -> Option<(PathBuf, PathBuf)> {
-    let dir = app_harness::any_bundled_dir()?;
-    let file = dir.join("mxm-mono-pr1.clap");
-    file.exists().then_some((dir, file))
+    mxm_player_harness::host_test::plugin_bundle("mxm-mono-pr1")
 }
 
 fn session(name: &str) -> Option<Session> {
@@ -80,18 +77,7 @@ fn brightness(samples: &[f32]) -> f32 {
 }
 
 fn set(session: &mut Session, name: &str, fraction: f64) -> String {
-    let parameter = session
-        .state()
-        .param(name)
-        .unwrap_or_else(|| panic!("missing parameter {name}"))
-        .clone();
-    session
-        .app()
-        .engine_mut()
-        .push_gui_event(Payload::ParamValue {
-            param_id: parameter.id,
-            value: parameter.min + fraction * (parameter.max - parameter.min),
-        });
+    mxm_player_harness::host_test::push_fraction(session, name, fraction);
     session.advance_blocks(4).expect("parameter edit settles");
     session.state().param(name).unwrap().text.clone()
 }

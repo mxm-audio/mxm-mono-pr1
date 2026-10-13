@@ -246,6 +246,7 @@ impl NiceEguiApp for MxmMonoPr1App {
         mxm_ui::theme::apply(&ctx);
         mxm_ui::typography::apply(&ctx);
         ctx.set_theme(mxm_ui::theme::preference());
+        mxm_ui::navigation::use_shared_keymap(&ctx);
         self.gui_context = Some(gui);
         Ok(())
     }

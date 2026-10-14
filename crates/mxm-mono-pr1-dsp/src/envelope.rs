@@ -4,7 +4,7 @@
 //! unmeasured; exponential segments and current-level retrigger are chosen until hardware evidence
 //! replaces them. Gate/trigger policy belongs to `control`, because both envelopes share it.
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 use mxm_dsp::guard::flush;
 
 pub const MIN_TIME_S: f32 = 0.002;

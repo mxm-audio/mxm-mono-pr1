@@ -3,7 +3,7 @@
 //! Continuous CV, held gate level and one-sample trigger pulse are not interchangeable routing
 //! values. The fixed Pro-One graph accepts only `Cv`; articulation consumes `Gate` and `Pulse`.
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 
 #[derive(Debug, Clone, Copy, PartialEq, Default)]
 pub struct Cv(f32);

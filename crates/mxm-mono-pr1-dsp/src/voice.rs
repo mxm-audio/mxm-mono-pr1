@@ -8,10 +8,10 @@
 use crate::{
     control::{Activity, Controller, Event, Inputs as ControlInputs, Params as ControlParams},
     filter::{GmFilter, OUTPUT_BOUND as FILTER_OUTPUT_BOUND},
-    finite_or,
     oscillator::{AOutput, AWaves, BOutput, BWaves, Oscillator},
     routing::{Routing, source, target},
 };
+use mxm_dsp::guard::finite_or;
 use mxm_rng::Xorshift32;
 
 pub const FREQUENCY_MOD_SEMITONES: f32 = 24.0; // Chosen destination scale.

@@ -311,11 +311,7 @@ impl Plugin for MxmMonoPr1 {
         // divisions (`plans/plan-tempo-sync-controls.md`).
         self.telemetry.tempo.publish(None);
         self.synced_lfo_hz = None;
-        self.sample_rate = if config.sample_rate.is_finite() {
-            config.sample_rate.max(1.0)
-        } else {
-            48_000.0
-        };
+        self.sample_rate = mxm_dsp::guard::finite_or(config.sample_rate, 48_000.0).max(1.0);
         self.voice = Voice::new();
         self.voice.set_sample_rate(self.sample_rate);
         self.voice.reset();

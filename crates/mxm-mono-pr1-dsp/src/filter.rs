@@ -10,7 +10,7 @@
 
 use std::f64::consts::PI;
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 use mxm_dsp::guard::flush;
 
 pub const BUFFER_GAIN: f32 = 3.4; // Derived: 1 + 240 kΩ / 100 kΩ; prose conflicts at 2.4.

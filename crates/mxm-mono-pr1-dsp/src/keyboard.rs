@@ -5,7 +5,7 @@
 //! fallback press but never trigger. Presses, rather than pitches, are stored so overlapping
 //! same-pitch notes and host voice ids remain distinct.
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 
 pub const CAPACITY: usize = 16;
 const CHANNELS: usize = 16;

@@ -26,19 +26,3 @@ pub mod oscillator;
 pub mod routing;
 pub mod signal;
 pub mod voice;
-
-/// Convert an untrusted plain value to a finite value before applying a consumer's range.
-#[inline(always)]
-pub(crate) fn finite_or(x: f32, fallback: f32) -> f32 {
-    if x.is_finite() { x } else { fallback }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn finite_or_replaces_a_non_finite_value() {
-        assert_eq!(finite_or(f32::NAN, 0.5), 0.5);
-    }
-}

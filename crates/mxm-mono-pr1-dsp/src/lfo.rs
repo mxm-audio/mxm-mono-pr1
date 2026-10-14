@@ -4,7 +4,7 @@
 //! square independently, so disabling every modulation waveform does not stop or retime Repeat.
 //! Waveform levels and phase are unmeasured; bipolar unit paths with fixed unity gains are chosen.
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 
 pub const RATE_MIN_HZ: f32 = 0.1;
 pub const RATE_MAX_HZ: f32 = 30.0;

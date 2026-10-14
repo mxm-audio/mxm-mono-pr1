@@ -27,12 +27,12 @@ use mxm_modulation::standard;
 
 use crate::{
     envelope::{Adsr, AdsrParams},
-    finite_or,
     keyboard::{KeyMode, Keyboard, NoteId, Outcome, Owner},
     lfo::{Lfo, Output as LfoOutput, WaveEnables},
     routing::{Graph, Routing, source, target},
     signal::{Cv, Gate, Pulse},
 };
+use mxm_dsp::guard::finite_or;
 
 pub const DEFAULT_KEY: u8 = 60;
 pub const GLIDE_REFERENCE_SEMITONES: f64 = 36.0;

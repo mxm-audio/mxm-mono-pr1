@@ -9,7 +9,7 @@
 //! remain unmeasured; the normalized levels below preserve
 //! the established unipolar saw/pulse versus centred-triangle distinction.
 
-use crate::finite_or;
+use mxm_dsp::guard::finite_or;
 
 pub const A_SAW_GAIN: f32 = 1.0;
 pub const A_PULSE_GAIN: f32 = 0.6; // Derived conductance ratio: 120 kΩ / 200 kΩ.

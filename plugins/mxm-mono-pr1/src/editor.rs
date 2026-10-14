@@ -243,10 +243,7 @@ impl NiceEguiApp for MxmMonoPr1App {
         gui: GuiContext,
         _frame: &mut nice_plug_egui::Frame,
     ) -> Result<(), nice_plug_egui::baseview::HandlerError> {
-        mxm_ui::theme::apply(&ctx);
-        mxm_ui::typography::apply(&ctx);
-        ctx.set_theme(mxm_ui::theme::preference());
-        mxm_ui::navigation::use_shared_keymap(&ctx);
+        mxm_ui::shell::install(&ctx);
         self.gui_context = Some(gui);
         Ok(())
     }
@@ -305,22 +302,14 @@ pub fn panel(
     if let Some(open) = telemetry.dev.take_browser() {
         presets.set_browser_open(open);
     }
-    if let Some(index) = telemetry.dev.take_theme()
-        && let Some(theme) = mxm_ui::theme::from_index(index)
-    {
-        ui.ctx().set_theme(theme);
-    }
+    mxm_ui::shell::developer_theme(ui.ctx(), &telemetry.dev);
     let tokens = tokens_for(ui);
-    let peak = telemetry.meter.take();
-    let clipped = telemetry.meter.clipped();
     mxm_ui::AppBar::new(crate::NAME).show_with(
         ui,
         &tokens,
         |ui| mxm_preset::ui::preset_row(ui, &tokens, params, setter, presets),
         |ui| {
-            if mxm_ui::shell::level_meter(ui, &tokens, peak, clipped) {
-                telemetry.meter.clear_clip();
-            }
+            mxm_ui::shell::peak_meter(ui, &tokens, &telemetry.meter);
             // Design system §3.1 slot 6: the instrument's output level sits beside its meter, not
             // on a card.
             mxm_ui::navigation::bar_card(ui, VOLUME_CARD, |ui| {

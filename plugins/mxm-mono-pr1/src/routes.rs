@@ -354,7 +354,10 @@ fn amount(target: usize, source: usize, name: String) -> FloatParam {
 /// would ship a dead knob. It is safe because the depth beside it is an **amount** and starts at
 /// zero: a revealed route at zero depth is audible as nothing.
 fn present(target: &str, source: &str, wired: bool) -> BoolParam {
-    BoolParam::new(format!("{target} from {source} on"), wired)
+    BoolParam::new(
+        mxm_modulation_params::reading::presence_name(target, source),
+        wired,
+    )
 }
 
 impl TargetRoutes {
@@ -366,33 +369,89 @@ impl TargetRoutes {
         let target = TARGET_NAMES[index];
         Self {
             key_on: present(target, n[0], wired(0)),
-            key: amount(index, 0, format!("{target} from {}", n[0])),
+            key: amount(
+                index,
+                0,
+                mxm_modulation_params::reading::amount_name(target, n[0]),
+            ),
             vel_on: present(target, n[1], wired(1)),
-            vel: amount(index, 1, format!("{target} from {}", n[1])),
+            vel: amount(
+                index,
+                1,
+                mxm_modulation_params::reading::amount_name(target, n[1]),
+            ),
             wheel_on: present(target, n[2], wired(2)),
-            wheel: amount(index, 2, format!("{target} from {}", n[2])),
+            wheel: amount(
+                index,
+                2,
+                mxm_modulation_params::reading::amount_name(target, n[2]),
+            ),
             press_on: present(target, n[3], wired(3)),
-            press: amount(index, 3, format!("{target} from {}", n[3])),
+            press: amount(
+                index,
+                3,
+                mxm_modulation_params::reading::amount_name(target, n[3]),
+            ),
             bend_on: present(target, n[4], wired(4)),
-            bend: amount(index, 4, format!("{target} from {}", n[4])),
+            bend: amount(
+                index,
+                4,
+                mxm_modulation_params::reading::amount_name(target, n[4]),
+            ),
             noise_on: present(target, n[5], wired(5)),
-            noise: amount(index, 5, format!("{target} from {}", n[5])),
+            noise: amount(
+                index,
+                5,
+                mxm_modulation_params::reading::amount_name(target, n[5]),
+            ),
             lfo_on: present(target, n[6], wired(6)),
-            lfo: amount(index, 6, format!("{target} from {}", n[6])),
+            lfo: amount(
+                index,
+                6,
+                mxm_modulation_params::reading::amount_name(target, n[6]),
+            ),
             gate_on: present(target, n[7], wired(7)),
-            gate: amount(index, 7, format!("{target} from {}", n[7])),
+            gate: amount(
+                index,
+                7,
+                mxm_modulation_params::reading::amount_name(target, n[7]),
+            ),
             fenv_on: present(target, n[8], wired(8)),
-            fenv: amount(index, 8, format!("{target} from {}", n[8])),
+            fenv: amount(
+                index,
+                8,
+                mxm_modulation_params::reading::amount_name(target, n[8]),
+            ),
             aenv_on: present(target, n[9], wired(9)),
-            aenv: amount(index, 9, format!("{target} from {}", n[9])),
+            aenv: amount(
+                index,
+                9,
+                mxm_modulation_params::reading::amount_name(target, n[9]),
+            ),
             bus_on: present(target, n[10], wired(10)),
-            bus: amount(index, 10, format!("{target} from {}", n[10])),
+            bus: amount(
+                index,
+                10,
+                mxm_modulation_params::reading::amount_name(target, n[10]),
+            ),
             wbus_on: present(target, n[11], wired(11)),
-            wbus: amount(index, 11, format!("{target} from {}", n[11])),
+            wbus: amount(
+                index,
+                11,
+                mxm_modulation_params::reading::amount_name(target, n[11]),
+            ),
             oscb_on: present(target, n[12], wired(12)),
-            oscb: amount(index, 12, format!("{target} from {}", n[12])),
+            oscb: amount(
+                index,
+                12,
+                mxm_modulation_params::reading::amount_name(target, n[12]),
+            ),
             osca_on: present(target, n[13], wired(13)),
-            osca: amount(index, 13, format!("{target} from {}", n[13])),
+            osca: amount(
+                index,
+                13,
+                mxm_modulation_params::reading::amount_name(target, n[13]),
+            ),
         }
     }
 
@@ -684,31 +743,83 @@ impl BusRoutes {
         let t = TARGET_NAMES[target::MOD_BUS];
         Self {
             key_on: present(t, n[0], init_present(target::MOD_BUS, 0)),
-            key: amount(target::MOD_BUS, 0, format!("{t} from {}", n[0])),
+            key: amount(
+                target::MOD_BUS,
+                0,
+                mxm_modulation_params::reading::amount_name(t, n[0]),
+            ),
             vel_on: present(t, n[1], init_present(target::MOD_BUS, 1)),
-            vel: amount(target::MOD_BUS, 1, format!("{t} from {}", n[1])),
+            vel: amount(
+                target::MOD_BUS,
+                1,
+                mxm_modulation_params::reading::amount_name(t, n[1]),
+            ),
             press_on: present(t, n[3], init_present(target::MOD_BUS, 3)),
-            press: amount(target::MOD_BUS, 3, format!("{t} from {}", n[3])),
+            press: amount(
+                target::MOD_BUS,
+                3,
+                mxm_modulation_params::reading::amount_name(t, n[3]),
+            ),
             bend_on: present(t, n[4], init_present(target::MOD_BUS, 4)),
-            bend: amount(target::MOD_BUS, 4, format!("{t} from {}", n[4])),
+            bend: amount(
+                target::MOD_BUS,
+                4,
+                mxm_modulation_params::reading::amount_name(t, n[4]),
+            ),
             noise_on: present(t, n[5], init_present(target::MOD_BUS, 5)),
-            noise: amount(target::MOD_BUS, 5, format!("{t} from {}", n[5])),
+            noise: amount(
+                target::MOD_BUS,
+                5,
+                mxm_modulation_params::reading::amount_name(t, n[5]),
+            ),
             lfo_on: present(t, n[6], init_present(target::MOD_BUS, 6)),
-            lfo: amount(target::MOD_BUS, 6, format!("{t} from {}", n[6])),
+            lfo: amount(
+                target::MOD_BUS,
+                6,
+                mxm_modulation_params::reading::amount_name(t, n[6]),
+            ),
             gate_on: present(t, n[7], init_present(target::MOD_BUS, 7)),
-            gate: amount(target::MOD_BUS, 7, format!("{t} from {}", n[7])),
+            gate: amount(
+                target::MOD_BUS,
+                7,
+                mxm_modulation_params::reading::amount_name(t, n[7]),
+            ),
             fenv_on: present(t, n[8], init_present(target::MOD_BUS, 8)),
-            fenv: amount(target::MOD_BUS, 8, format!("{t} from {}", n[8])),
+            fenv: amount(
+                target::MOD_BUS,
+                8,
+                mxm_modulation_params::reading::amount_name(t, n[8]),
+            ),
             aenv_on: present(t, n[9], init_present(target::MOD_BUS, 9)),
-            aenv: amount(target::MOD_BUS, 9, format!("{t} from {}", n[9])),
+            aenv: amount(
+                target::MOD_BUS,
+                9,
+                mxm_modulation_params::reading::amount_name(t, n[9]),
+            ),
             bus_on: present(t, n[10], init_present(target::MOD_BUS, 10)),
-            bus: amount(target::MOD_BUS, 10, format!("{t} from {}", n[10])),
+            bus: amount(
+                target::MOD_BUS,
+                10,
+                mxm_modulation_params::reading::amount_name(t, n[10]),
+            ),
             wbus_on: present(t, n[11], init_present(target::MOD_BUS, 11)),
-            wbus: amount(target::MOD_BUS, 11, format!("{t} from {}", n[11])),
+            wbus: amount(
+                target::MOD_BUS,
+                11,
+                mxm_modulation_params::reading::amount_name(t, n[11]),
+            ),
             oscb_on: present(t, n[12], init_present(target::MOD_BUS, 12)),
-            oscb: amount(target::MOD_BUS, 12, format!("{t} from {}", n[12])),
+            oscb: amount(
+                target::MOD_BUS,
+                12,
+                mxm_modulation_params::reading::amount_name(t, n[12]),
+            ),
             osca_on: present(t, n[13], init_present(target::MOD_BUS, 13)),
-            osca: amount(target::MOD_BUS, 13, format!("{t} from {}", n[13])),
+            osca: amount(
+                target::MOD_BUS,
+                13,
+                mxm_modulation_params::reading::amount_name(t, n[13]),
+            ),
         }
     }
 

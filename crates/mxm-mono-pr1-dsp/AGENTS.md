@@ -124,7 +124,7 @@ Why: [NOTES.md § The frame unit](NOTES.md#the-frame-unit-is-⅛-and-it-is-sized
   factor never added (`amplitude_is_the_standard_factor_after_the_vca`). Every pair absent at Init
   ([NOTES.md § Named exclusions](NOTES.md#named-exclusions-which-are-decisions-rather-than-omissions)).
 - **A routable gate is not a target**: a fourth gate contender is the one way to lose exact `Inert`.
-- No arpeggiator/sequencer, random control source or sample-and-hold. `Rng` drives audio noise only.
+- No arpeggiator/sequencer, random control source or sample-and-hold. `Xorshift32` drives audio noise only.
 - Key, **Velocity as `v − 1` of the press that last triggered the envelopes** (`envelope_velocity`),
   wheel, pressure and bend publish through `mxm_modulation::standard`. A target whose machine routes
   shared one bus scale keeps it (`mxm_modulation::sum_split`); every added pair takes the standard
@@ -149,7 +149,7 @@ Why: [NOTES.md § The frame unit](NOTES.md#the-frame-unit-is-⅛-and-it-is-sized
   the VCA and never keep the core awake. At Inert, phases and noise freeze and output is exact zero
   ([NOTES.md § Activity](NOTES.md#activity-reset-numeric-and-chosen-values)).
 - Reset clears every control, pulse, oscillator, random, filter, coupling and delayed-route state.
-- Per-sample paths allocate and lock nothing. `[dependencies]` is exactly `mxm-modulation`; MSRV
+- Per-sample paths allocate and lock nothing. `[dependencies]` is exactly `mxm-modulation` and `mxm-rng`; MSRV
   **1.88** (`let` chains in `keyboard.rs`). `mxm-measure`, `mxm-audio-file` and
   `mxm-audio-file-decode` are dev-only, outside the shipped graph.
 
@@ -168,8 +168,8 @@ establish hardware fidelity. Model measurements: [NOTES.md § Model measurements
 
 # Work Guidance
 
-- Keep this crate framework-free. **One runtime dependency**, `mxm-modulation`, which is itself
-  dependency-free and below this floor; a test-only `[dev-dependencies]` edge is not one, and
+- Keep this crate framework-free. **Two runtime dependencies**, `mxm-modulation` and `mxm-rng`,
+  each dependency-free and below this floor; a test-only `[dev-dependencies]` edge is not one, and
   `cargo tree` is the check. Preserve the publication order above — it *is* the unit delay.
 - Preserve machine constraints deliberately and label every unmeasured calibration choice.
 - The arpeggiator/sequencer and random modulation remain out unless the product boundary is changed

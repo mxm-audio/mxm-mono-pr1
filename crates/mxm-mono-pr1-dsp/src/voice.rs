@@ -6,13 +6,13 @@
 //! 2026-09-26).
 
 use crate::{
-    Rng,
     control::{Activity, Controller, Event, Inputs as ControlInputs, Params as ControlParams},
     filter::{GmFilter, OUTPUT_BOUND as FILTER_OUTPUT_BOUND},
     finite_or,
     oscillator::{AOutput, AWaves, BOutput, BWaves, Oscillator},
     routing::{Routing, source, target},
 };
+use mxm_rng::Xorshift32;
 
 pub const FREQUENCY_MOD_SEMITONES: f32 = 24.0; // Chosen destination scale.
 pub const PWM_MOD_DEPTH: f32 = 0.5; // Chosen: full CV can reach either documented DC endpoint.
@@ -165,7 +165,7 @@ pub struct Voice {
     oscillator_a: Oscillator,
     oscillator_b: Oscillator,
     filter: GmFilter,
-    noise: Rng,
+    noise: Xorshift32,
 }
 
 impl Default for Voice {
@@ -182,7 +182,7 @@ impl Voice {
             oscillator_a: Oscillator::new(),
             oscillator_b: Oscillator::new(),
             filter: GmFilter::new(),
-            noise: Rng::new(NOISE_SEED),
+            noise: Xorshift32::new(NOISE_SEED),
         }
     }
 
@@ -214,7 +214,7 @@ impl Voice {
         self.oscillator_a.reset();
         self.oscillator_b.reset();
         self.filter.reset();
-        self.noise = Rng::new(NOISE_SEED);
+        self.noise = Xorshift32::new(NOISE_SEED);
     }
 
     fn frequency(&self, semitones: f32) -> f32 {
@@ -255,7 +255,7 @@ impl Voice {
         // The generator advances only on a sample that runs, so an inert stretch cannot move the
         // noise sequence and the next phrase renders identically however long the gap was.
         let noise = if begun.runs {
-            self.noise.next_bipolar()
+            self.noise.bipolar_f32()
         } else {
             0.0
         };

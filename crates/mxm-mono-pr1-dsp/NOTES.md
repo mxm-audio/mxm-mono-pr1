@@ -219,7 +219,7 @@ when the amplifier settles: neither can keep the core awake or reappear as a gho
 At Inert LFO and oscillator phases freeze, glide settles, filter tails clear, noise state freezes,
 and output is exact zero. Reset clears every control, pulse, oscillator, random, filter, coupling and
 delayed-route state. Per-sample paths allocate and lock nothing. `[dependencies]` carries exactly
-one entry, `mxm-modulation`, which is dependency-free at 1.87; MSRV is **1.88** because
+`mxm-modulation` and `mxm-rng`, each dependency-free at 1.87; MSRV is **1.88** because
 `keyboard.rs` uses `let` chains, which stabilised there, so 1.87 was never true of this crate.
 `[dev-dependencies]` carries `mxm-measure`, `mxm-audio-file` and `mxm-audio-file-decode`, test-only
 edges outside the shipped graph.
@@ -238,11 +238,12 @@ This is the seventh honest per-machine DSP copy. Do not depend on or extract a s
 
 | Candidate | Standing |
 |---|---|
-| `flush`, xorshift `Rng` | Same established primitive form, copied locally |
+| `flush` | Same established primitive form, copied locally |
+| xorshift `Rng` | **Shared** — `mxm-rng`'s `Xorshift32`, bit-exact to the copy (the audit's O3) |
 | ADSR | Stall-safe exponential shape follows the sibling pattern; machine floor, snap and chosen ceiling differ |
 | Press ledger | Same press/id/exhaustion policy; Pro-One Normal/Retrig selection and triggers are machine-specific |
 | LFO | New additive three-enable graph with clock independent of the sum |
-| Routing | **Shared** — `crates/mxm-modulation`, this crate's one runtime dependency. What stays local is the declaration: the source list, the target list, the frame unit and the scale columns |
+| Routing | **Shared** — `crates/mxm-modulation`, one of this crate's two runtime dependencies. What stays local is the declaration: the source list, the target list, the frame unit and the scale columns |
 | PolyBLEP phasor/pulse | Established local primitive form; Pro-One unipolar levels, additive sums and sub-sample B→A reset are machine-specific |
 | CEM3320 filter | New per-machine gm-cell implementation; unlike sibling diode ladders, saturation is on both sides of every integrator and feedback includes this machine's buffered node |
 | VCA | New machine-specific operating-drive form |
@@ -251,9 +252,9 @@ This is the seventh honest per-machine DSP copy. Do not depend on or extract a s
 
 **The rulers are shared, the thresholds are not.** `mxm-measure` is a `[dev-dependencies]` entry —
 zero dependencies and a 1.87 floor of its own, below this crate's, and **not in the shipped graph**.
-The one runtime dependency is `mxm-modulation`, which is also dependency-free and below this floor,
-so the crate stays genuinely portable; `cargo tree -p mxm-mono-pr1-dsp -e normal` is the check and
-must show exactly those two lines. Measurements come from there; every bound and
+The runtime dependencies are `mxm-modulation` and `mxm-rng`, both dependency-free and below this
+floor, so the crate stays genuinely portable; `cargo tree -p mxm-mono-pr1-dsp -e normal` is the check
+and must show exactly those three lines. Measurements come from there; every bound and
 its headroom stays in the test that argues for it.
 
 The crate has **70 focused tests in the library plus a seven-test reachability suite** in `tests/`.

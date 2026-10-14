@@ -39,44 +39,14 @@ pub(crate) fn finite_or(x: f32, fallback: f32) -> f32 {
     if x.is_finite() { x } else { fallback }
 }
 
-/// Deterministic xorshift state for the audio-noise path.
-///
-/// The Pro-One has no random control source or sample-and-hold, and the conversion does not invent
-/// one: noise is routable because it is *audio this machine already makes*, which is what
-/// `plan-modulation-routing.md` §2.3 permits, and it is the same single stream the mixer hears
-/// rather than a second generator.
-#[derive(Debug, Clone)]
-pub struct Rng(u32);
-
-impl Rng {
-    pub const fn new(seed: u32) -> Self {
-        Self(if seed == 0 { 0x9e37_79b9 } else { seed })
-    }
-
-    /// Next exactly representable value in `[-1, 1)`.
-    #[inline]
-    pub fn next_bipolar(&mut self) -> f32 {
-        self.0 ^= self.0 << 13;
-        self.0 ^= self.0 >> 17;
-        self.0 ^= self.0 << 5;
-        ((self.0 >> 8) as f32 / 8_388_608.0) - 1.0
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn housekeeping_is_exact_bounded_and_deterministic() {
+    fn housekeeping_is_exact() {
         assert_eq!(flush(1e-30), 0.0);
         assert_eq!(flush(-0.25), -0.25);
         assert_eq!(finite_or(f32::NAN, 0.5), 0.5);
-        let (mut a, mut b) = (Rng::new(0x100), Rng::new(0x100));
-        for _ in 0..10_000 {
-            let x = a.next_bipolar();
-            assert_eq!(x, b.next_bipolar());
-            assert!((-1.0..1.0).contains(&x));
-        }
     }
 }

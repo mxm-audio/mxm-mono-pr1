@@ -141,7 +141,7 @@ breaks another is a broken change. CI builds and tests on all three, only when s
 
 | Crate | MSRV | Why |
 |---|---|---|
-| `crates/mxm-mono-pr1-dsp` | **1.88** | Its control architecture and complete audio voice. **Two runtime dependencies**, `mxm-modulation` and `mxm-rng`, both dependency-free and below this floor — the routing conversion and the shared generators added them, and `cargo tree` on this crate is what keeps the GUI floor out. **1.88 rather than 1.87** because `keyboard.rs` uses `let` chains, which stabilised there |
+| `crates/mxm-mono-pr1-dsp` | **1.88** | Its control architecture and complete audio voice. **Three runtime dependencies**, `mxm-modulation`, `mxm-rng` and `mxm-dsp`, all dependency-free and below this floor — the routing conversion and the shared generators and primitives added them, and `cargo tree` on this crate is what keeps the GUI floor out. **1.88 rather than 1.87** because `keyboard.rs` uses `let` chains, which stabilised there |
 | `plugins/mxm-mono-pr1` | **1.95** | Its dynamically paged editor and shipped preset system pull in egui |
 
 ## Licensing

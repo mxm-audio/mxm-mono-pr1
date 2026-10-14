@@ -149,7 +149,7 @@ Why: [NOTES.md § The frame unit](NOTES.md#the-frame-unit-is-⅛-and-it-is-sized
   the VCA and never keep the core awake. At Inert, phases and noise freeze and output is exact zero
   ([NOTES.md § Activity](NOTES.md#activity-reset-numeric-and-chosen-values)).
 - Reset clears every control, pulse, oscillator, random, filter, coupling and delayed-route state.
-- Per-sample paths allocate and lock nothing. `[dependencies]` is exactly `mxm-modulation` and `mxm-rng`; MSRV
+- Per-sample paths allocate and lock nothing. `[dependencies]` is exactly `mxm-modulation`, `mxm-rng` and `mxm-dsp`; MSRV
   **1.88** (`let` chains in `keyboard.rs`). `mxm-measure`, `mxm-audio-file` and
   `mxm-audio-file-decode` are dev-only, outside the shipped graph.
 
@@ -168,8 +168,8 @@ establish hardware fidelity. Model measurements: [NOTES.md § Model measurements
 
 # Work Guidance
 
-- Keep this crate framework-free. **Two runtime dependencies**, `mxm-modulation` and `mxm-rng`,
-  each dependency-free and below this floor; a test-only `[dev-dependencies]` edge is not one, and
+- Keep this crate framework-free. **Three runtime dependencies**, `mxm-modulation`, `mxm-rng` and
+  `mxm-dsp`, each dependency-free and below this floor; a test-only `[dev-dependencies]` edge is not one, and
   `cargo tree` is the check. Preserve the publication order above — it *is* the unit delay.
 - Preserve machine constraints deliberately and label every unmeasured calibration choice.
 - The arpeggiator/sequencer and random modulation remain out unless the product boundary is changed

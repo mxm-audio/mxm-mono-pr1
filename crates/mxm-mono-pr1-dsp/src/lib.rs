@@ -27,12 +27,6 @@ pub mod routing;
 pub mod signal;
 pub mod voice;
 
-/// Flush recursive state before it can become denormal (about -400 dB for `f32`).
-#[inline(always)]
-pub fn flush(x: f32) -> f32 {
-    if x.abs() < 1e-20 { 0.0 } else { x }
-}
-
 /// Convert an untrusted plain value to a finite value before applying a consumer's range.
 #[inline(always)]
 pub(crate) fn finite_or(x: f32, fallback: f32) -> f32 {
@@ -44,9 +38,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn housekeeping_is_exact() {
-        assert_eq!(flush(1e-30), 0.0);
-        assert_eq!(flush(-0.25), -0.25);
+    fn finite_or_replaces_a_non_finite_value() {
         assert_eq!(finite_or(f32::NAN, 0.5), 0.5);
     }
 }

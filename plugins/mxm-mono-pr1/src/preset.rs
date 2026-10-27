@@ -25,8 +25,13 @@ impl mxm_preset::Instrument for MxmMonoPr1Params {
         &self.preset
     }
 
-    fn factory_files(&self) -> &'static [(&'static str, &'static str)] {
+    /// The installed set, but in a unit test, which is loaded from no bundle: the repository's.
+    #[cfg(test)]
+    fn factory_files(&self) -> Vec<(String, String)> {
         FACTORY_FILES
+            .iter()
+            .map(|(name, json)| ((*name).to_owned(), (*json).to_owned()))
+            .collect()
     }
 
     fn default_missing_legacy_parameter(&self, id: &str) -> bool {
@@ -34,130 +39,22 @@ impl mxm_preset::Instrument for MxmMonoPr1Params {
     }
 }
 
-pub const FACTORY_FILES: &[(&str, &str)] = &[
-    ("Basic saw", include_str!("../presets/basic-saw.json")),
-    ("Beating pair", include_str!("../presets/beating-pair.json")),
-    (
-        "Twin saw bass",
-        include_str!("../presets/twin-saw-bass.json"),
-    ),
-    (
-        "Square foundation",
-        include_str!("../presets/square-foundation.json"),
-    ),
-    (
-        "Saw pulse stack",
-        include_str!("../presets/saw-pulse-stack.json"),
-    ),
-    (
-        "Triple B stack",
-        include_str!("../presets/triple-b-stack.json"),
-    ),
-    (
-        "Hollow pulses",
-        include_str!("../presets/hollow-pulses.json"),
-    ),
-    ("Octave pair", include_str!("../presets/octave-pair.json")),
-    ("Fifth pair", include_str!("../presets/fifth-pair.json")),
-    ("Wide detune", include_str!("../presets/wide-detune.json")),
-    ("Soft attack", include_str!("../presets/soft-attack.json")),
-    ("Long release", include_str!("../presets/long-release.json")),
-    ("Short pluck", include_str!("../presets/short-pluck.json")),
-    ("Bright pluck", include_str!("../presets/bright-pluck.json")),
-    ("Filter snap", include_str!("../presets/filter-snap.json")),
-    (
-        "Resonant bass",
-        include_str!("../presets/resonant-bass.json"),
-    ),
-    (
-        "Tracking lead",
-        include_str!("../presets/tracking-lead.json"),
-    ),
-    ("Open brass", include_str!("../presets/open-brass.json")),
-    ("Muted brass", include_str!("../presets/muted-brass.json")),
-    ("Singing lead", include_str!("../presets/singing-lead.json")),
-    (
-        "Vibrato direct",
-        include_str!("../presets/vibrato-direct.json"),
-    ),
-    (
-        "Vibrato wheel",
-        include_str!("../presets/vibrato-wheel.json"),
-    ),
-    (
-        "Filter motion direct",
-        include_str!("../presets/filter-motion-direct.json"),
-    ),
-    (
-        "Filter motion wheel",
-        include_str!("../presets/filter-motion-wheel.json"),
-    ),
-    (
-        "Dual envelope sweep",
-        include_str!("../presets/dual-envelope-sweep.json"),
-    ),
-    (
-        "Pulse sweep A",
-        include_str!("../presets/pulse-sweep-a.json"),
-    ),
-    (
-        "Pulse sweep B",
-        include_str!("../presets/pulse-sweep-b.json"),
-    ),
-    (
-        "Twin pulse motion",
-        include_str!("../presets/twin-pulse-motion.json"),
-    ),
-    (
-        "Slow LFO drift",
-        include_str!("../presets/slow-lfo-drift.json"),
-    ),
-    ("Fast trill", include_str!("../presets/fast-trill.json")),
-    (
-        "Hard sync lead",
-        include_str!("../presets/hard-sync-lead.json"),
-    ),
-    ("Hidden sync", include_str!("../presets/hidden-sync.json")),
-    (
-        "Sync pulse dropout",
-        include_str!("../presets/sync-pulse-dropout.json"),
-    ),
-    ("B low sweep", include_str!("../presets/b-low-sweep.json")),
-    ("B self bend", include_str!("../presets/b-self-bend.json")),
-    (
-        "B pulse self motion",
-        include_str!("../presets/b-pulse-self-motion.json"),
-    ),
-    (
-        "B filter motion",
-        include_str!("../presets/b-filter-motion.json"),
-    ),
-    ("Mixed buses", include_str!("../presets/mixed-buses.json")),
-    ("Wheel timbre", include_str!("../presets/wheel-timbre.json")),
-    ("Normal glide", include_str!("../presets/normal-glide.json")),
-    ("Auto glide", include_str!("../presets/auto-glide.json")),
-    (
-        "Retrigger lead",
-        include_str!("../presets/retrigger-lead.json"),
-    ),
-    ("Repeat pulse", include_str!("../presets/repeat-pulse.json")),
-    (
-        "Repeat bare clock",
-        include_str!("../presets/repeat-bare-clock.json"),
-    ),
-    (
-        "Sustain drone",
-        include_str!("../presets/sustain-drone.json"),
-    ),
-    ("Noise wash", include_str!("../presets/noise-wash.json")),
-    ("Noise strike", include_str!("../presets/noise-strike.json")),
-    ("Repeat noise", include_str!("../presets/repeat-noise.json")),
-    ("Tempo repeat", include_str!("../presets/tempo-repeat.json")),
-    (
-        "Signal laboratory",
-        include_str!("../presets/signal-laboratory.json"),
-    ),
-];
+/// The factory set as it ships, `(name, json)` in its order: the repository's `presets/`, which
+/// is installed beside the plugin and read there (`mxm_preset::installed_factory_dir`). For the
+/// tests, the integration tests and the audits, which are loaded from no bundle; the plugin itself
+/// never reads it.
+pub static FACTORY_FILES: std::sync::LazyLock<Vec<(&'static str, &'static str)>> =
+    std::sync::LazyLock::new(|| {
+        let folder = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("presets");
+        mxm_preset::read_factory_dir(&folder)
+            .into_iter()
+            .map(|(file, json)| {
+                let name = mxm_preset::Preset::parse(&json, crate::CLAP_ID)
+                    .map_or(file, |preset| preset.name);
+                (&*String::leak(name), &*String::leak(json))
+            })
+            .collect()
+    });
 
 #[cfg(test)]
 mod tests {
@@ -937,7 +834,7 @@ mod tests {
     fn every_file_is_complete_distinct_categorised_and_owned() {
         let params = params();
         let mut seen = Vec::new();
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let preset = Preset::parse(text, crate::CLAP_ID)
                 .unwrap_or_else(|error| panic!("{name}: {error}"));
             assert_eq!(&preset.name, name);
@@ -953,7 +850,7 @@ mod tests {
 
     #[test]
     fn every_factory_sound_renders_finite_audible_output() {
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let params = params();
             let preset = Preset::parse(text, crate::CLAP_ID).unwrap();
             for (id, pointer, _) in params.param_map() {
@@ -1038,7 +935,7 @@ mod tests {
             format!("{hash:016x}")
         };
         println!("  | `init` | `{}` |", digest(&render(None)));
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             println!("  | `{name}` | `{}` |", digest(&render(Some(text))));
         }
     }
@@ -1087,7 +984,7 @@ mod tests {
     fn factory_content_does_not_move_master_volume() {
         let params = params();
         let default = params.volume.default_normalized_value();
-        for (name, text) in FACTORY_FILES {
+        for (name, text) in FACTORY_FILES.iter() {
             let preset = Preset::parse(text, crate::CLAP_ID).unwrap();
             assert_eq!(preset.params["volume"].v, default, "{name}");
         }

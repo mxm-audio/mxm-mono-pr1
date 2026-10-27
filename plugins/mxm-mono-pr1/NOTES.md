@@ -150,9 +150,9 @@ claim is made that a factory sound still sounds as it did.
 
 The factory set is exactly fifty complete, categorised, distinct snapshots plus generated Init.
 `src/preset.rs` is the readable overrides-on-defaults design and its ignored generator writes the
-compiled JSON files. Keep maker/model names out of preset names. Do not hand-edit generated files;
-change the design and regenerate. Every sound must render finite, bounded audible output under its
-intended note, and factory content must not move master Volume.
+JSON files in `presets/`. Keep maker/model names out of preset names. Do not hand-edit generated
+files; change the design and regenerate. Every sound must render finite, bounded audible output
+under its intended note, and factory content must not move master Volume.
 
 `control-map.json` claims only equivalent collection roles. Independent waveform enables are not a
 single wave role. `osc2.sync` maps the switch that enables B as A's sync source. `mixer.src3` maps

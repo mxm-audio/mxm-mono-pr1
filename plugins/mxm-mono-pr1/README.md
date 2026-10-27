@@ -35,9 +35,9 @@ Init is generated from all 318 host defaults — 40 voice controls and 139 routi
 and an amount each. Every amount starts at zero except the multiplier's own two factors, which start
 at full so that `Mod bus × Wheel` is what a fresh instance does. Fifty complete, categorised factory
 sounds exercise the additive waves, hidden sync source, pulse dropouts, the two modules,
-oscillator-B modulation,
-articulation modes, noise and a tempo-synced Repeat. Factory sounds are compiled into the plugin;
-user presets use the collection's readable JSON format.
+oscillator-B modulation, articulation modes, noise and a tempo-synced Repeat. Factory sounds are
+files installed with the plugin, beside the `.clap` and inside the `.vst3`, and any CLAP host lists
+and loads them; user presets use the collection's readable JSON format.
 
 `control-map.json` claims only standard roles with equivalent meanings. Independent wave switches
 remain unclaimed rather than being misrepresented as a single selector. The five routing roles it
@@ -64,5 +64,5 @@ cargo xtask bundle mxm-mono-pr1 --release
 ```
 
 The loadable bundle is written to `target/bundled/mxm-mono-pr1.clap`; bundling stages the controller
-map beside it. GPL-3.0-or-later — see the repository's [`LICENSE`](../../LICENSE). All
-implementation code is original.
+map and the factory presets beside it. GPL-3.0-or-later — see the repository's
+[`LICENSE`](../../LICENSE). All implementation code is original.

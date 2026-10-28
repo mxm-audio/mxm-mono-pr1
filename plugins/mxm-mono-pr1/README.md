@@ -36,7 +36,7 @@ and an amount each. Every amount starts at zero except the multiplier's own two 
 at full so that `Mod bus × Wheel` is what a fresh instance does. Fifty complete, categorised factory
 sounds exercise the additive waves, hidden sync source, pulse dropouts, the two modules,
 oscillator-B modulation, articulation modes, noise and a tempo-synced Repeat. Factory sounds are
-files installed with the plugin, beside the `.clap` and inside the `.vst3`, and any CLAP host lists
+files installed with the plugin, in its version's folder under the local data directory, and any CLAP host lists
 and loads them; user presets use the collection's readable JSON format.
 
 `control-map.json` claims only standard roles with equivalent meanings. Independent wave switches

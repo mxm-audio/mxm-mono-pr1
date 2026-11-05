@@ -20,9 +20,8 @@ use mxm_mono_pr1_dsp::{
     },
 };
 use mxm_params::text;
-use mxm_params::text::ValueToString;
 use nice_plug::prelude::*;
-use std::sync::{Arc, RwLock};
+use std::sync::RwLock;
 
 const SIGNAL_SMOOTHING_MS: f32 = 10.0;
 const PITCH_SMOOTHING_MS: f32 = 20.0;
@@ -95,19 +94,6 @@ impl OctaveParam {
     }
 }
 
-/// Tenths of a millisecond below a second, hundredths of a second from it — **the unit chosen from
-/// the rounded tenths, not the raw value.** Chosen from the raw value, 0.99995 s printed
-/// `1000.0 ms`, which parses to one second and prints `1.00 s`.
-fn v2s_time() -> ValueToString {
-    Arc::new(|seconds| {
-        let ms = seconds * 1_000.0;
-        if (ms * 10.0).round() >= 10_000.0 {
-            format!("{seconds:.2} s")
-        } else {
-            format!("{ms:.1} ms")
-        }
-    })
-}
 fn amount(name: &'static str, default: f32) -> FloatParam {
     FloatParam::new(name, default, FloatRange::Linear { min: 0.0, max: 1.0 })
         .with_smoother(SmoothingStyle::Linear(SIGNAL_SMOOTHING_MS))
@@ -125,7 +111,7 @@ fn seconds(name: &'static str, default: f32, min: f32, max: f32) -> FloatParam {
             factor: FloatRange::skew_factor(-2.0),
         },
     )
-    .with_value_to_string(v2s_time())
+    .with_value_to_string(text::tenths_of_milliseconds_then_seconds())
     .with_string_to_value(text::parse_time())
 }
 
